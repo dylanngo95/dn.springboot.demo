@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,6 +22,7 @@ public class Student {
     private Integer id;
 
     @NotNull
+    @Size(min = 5, max = 30, message = "Invalid Name: Must be of 3 - 30 characters")
     private String name;
 
     @NotNull

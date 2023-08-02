@@ -3,6 +3,7 @@ package com.dylanops.demo.student.controller;
 import com.dylanops.demo.student.entity.Student;
 import com.dylanops.demo.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,14 +22,13 @@ public class StudentController {
     }
 
     @PostMapping("/add")
-    public Student add(@RequestBody Student student) {
+    public Student add(@RequestBody @Validated Student student) {
         return studentService.save(student);
     }
 
     @GetMapping("/get/{id}")
     public Student get(@PathVariable Integer id) {
-        Optional<Student> student = studentService.get(id);
-        return student.orElse(null);
+        return studentService.get(id).get();
     }
 
     @GetMapping("/delete/{id}")
